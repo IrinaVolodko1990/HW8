@@ -118,6 +118,15 @@ int[] FindSumElementInRow(int[,] doubleArr)
     }
     return sumArray;
 }
+int FindMinSum(int[] array)
+{
+    int min = 0;
+    for (int i = 1; i < array.Length; i++)
+    {
+        if (array[i] > min) array[i] = min;
+    }
+    return min;
+}
 void PrintArray(int[] array)
 {
     int size = array.Length;
@@ -127,7 +136,43 @@ void PrintArray(int[] array)
     }
 }
 
-int[,] doubleArray = CreateDoubleArray(3,2);
+int[,] doubleArray = CreateDoubleArray(5, 3);
 PrintDoubleArray(doubleArray);
 int[] sumArray = FindSumElementInRow(doubleArray);
 PrintArray(sumArray);
+Console.WriteLine();
+Console.WriteLine ($"The row with the smallest sum of elements - {FindMinSum(sumArray) + 1}");
+
+//Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+// Например, даны 2 матрицы:
+// 2 4 | 3 4
+// 3 2 | 3 3
+// Результирующая матрица будет:
+// 18 20
+// 15 18
+
+int[,] CreateDoubleArray(int row, int column)
+{
+    int[,] doubleArr = new int[row, column];
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            doubleArr[i, j] = new Random().Next(0, 10);
+        }
+    }
+    return doubleArr;
+}
+void PrintDoubleArray(int[,] doubleArr)
+{
+    int row = doubleArr.GetLength(0);
+    int column = doubleArr.GetLength(1);
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            Console.Write($"{doubleArr[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
