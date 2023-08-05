@@ -166,6 +166,7 @@ int[,] CreateDoubleArray(int row, int column)
 }
 void PrintDoubleArray(int[,] doubleArr)
 {
+    Console.WriteLine();
     int row = doubleArr.GetLength(0);
     int column = doubleArr.GetLength(1);
     for (int i = 0; i < row; i++)
@@ -177,3 +178,46 @@ void PrintDoubleArray(int[,] doubleArr)
         Console.WriteLine();
     }
 }
+bool IsPossibleMatrixMiltiplication(int[,] firstArr, int[,] secondArr)
+{
+    int columnFirstArr = firstArr.GetLength(1);
+    int rowSecondArr = secondArr.GetLength(0);
+    if (columnFirstArr == rowSecondArr)
+    {
+        return true;
+    }
+    else { return false;}
+
+}
+int[,] MatrixMultiplication(int[,] firstArr, int[,] secondArr)
+{
+    int row = firstArr.GetLength(0);
+    int column = secondArr.GetLength(1);
+    int[,] resultMatrix = new int[row, column];
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            int sum = 0;
+            for (int k = 0; k < firstArr.GetLength(1); k++)
+            {
+                sum += firstArr[i, k] * secondArr[k, j];
+            }
+            resultMatrix[i, j] = sum;
+        }
+    }
+    return resultMatrix;
+
+}
+
+int[,] firstMatrix = CreateDoubleArray(2, 2);
+int[,] secondMatrix = CreateDoubleArray(2, 2);
+PrintDoubleArray(firstMatrix);
+PrintDoubleArray(secondMatrix);
+if (IsPossibleMatrixMiltiplication(firstMatrix, secondMatrix))
+{
+    int[,] resultMatrix = MatrixMultiplication(firstMatrix, secondMatrix);
+    Console.WriteLine("Result of matrix multiplication: ");
+    PrintDoubleArray(resultMatrix);
+}
+else Console.WriteLine("Matrix multiplication impossible");
